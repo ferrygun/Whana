@@ -1,0 +1,7 @@
+table.schemaName = "NEO_CG2SX3P5XHHQEO58DKM7BWU0V";
+table.tableType = COLUMNSTORE;
+table.description = "My Table";
+table.columns = [
+          {name = "File_Name"; sqlType = NVARCHAR; nullable = true; length=20;},
+          {name = "File_Content"; sqlType = BLOB; nullable = true;}
+];
