@@ -9,12 +9,16 @@ import java.nio.file.WatchService;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+import java.util.Date;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import java.util.Date;
+
 
 public class FolderMonitor  {
 
@@ -22,11 +26,34 @@ public class FolderMonitor  {
 	static final String DB_URL = "jdbc:sap://localhost:30015/?currentschema=NEO_CG2SX3P5XHHQEO58DKM7BWU0V";
 
 	//  Database credentials
-	static final String USER = "DEV_5GKYRR9GKKT9NTV5RD7U0DGMG";
-	static final String PASS = "Tz2b06AOLVAiuwZ";
+	static String USER;
+	static String PASS;
 	static final String IMGFolder = "C:\\java\\imageWA";
 
 	public static void main(String[] args) throws IOException, InterruptedException, Exception, IOException, SQLException {
+
+
+		Properties prop = new Properties();
+		InputStream input = null;
+ 
+		try {
+ 
+			input = new FileInputStream("config.properties");
+			prop.load(input);
+			USER = prop.getProperty("user");
+			PASS = prop.getProperty("pwd");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
 		Path imgFolder = Paths.get(IMGFolder);
 		WatchService watchService = FileSystems.getDefault().newWatchService();
