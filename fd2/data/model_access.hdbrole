@@ -1,0 +1,3 @@
+role p1940803061trial.fd2::model_access {
+          sql object p1940803061trial.fd2.data::mytable: SELECT,INSERT;
+}
